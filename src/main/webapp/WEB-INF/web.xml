@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app version="2.5" xmlns="http://java.sun.com/xml/ns/javaee"
+xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd">
+
+
+    <!-- General description of your web application -->
+
+    <display-name>Webmention Scout</display-name>
+    <description>
+    A simple Webmention receiver 
+    </description>
+    <context-param>
+        <description>Location of the webmention repository</description>
+        <param-name>webmention.repository.folder</param-name>
+        <param-value>${webmention.repository.folder}</param-value>
+    </context-param>
+
+    <servlet>
+      <servlet-name>WebmentionHandler</servlet-name>
+<!--       <description>
+        This servlet processes Webmention requests. 
+       
+      </description> -->
+      <servlet-class>inescid.webmention.servlet.ReceiverServlet</servlet-class>
+      <!-- Load this servlet at server startup time -->
+      <load-on-startup>5</load-on-startup>
+    </servlet>
+
+    <servlet-mapping>
+      <servlet-name>WebmentionHandler</servlet-name>
+      <url-pattern>/webmention-endpoint</url-pattern>
+    </servlet-mapping>
+
+    <session-config>
+      <session-timeout>1</session-timeout>
+    </session-config>
+
+</web-app>
